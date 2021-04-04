@@ -16,10 +16,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private DestinationViewModel destinationViewModel;
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
-    private LiveData<List<Destination>> destinationList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-        destinationViewModel = new ViewModelProvider.AndroidViewModelFactory(MainActivity.this
+        DestinationViewModel destinationViewModel = new ViewModelProvider.AndroidViewModelFactory(MainActivity.this
                 .getApplication())
                 .create(DestinationViewModel.class);
 

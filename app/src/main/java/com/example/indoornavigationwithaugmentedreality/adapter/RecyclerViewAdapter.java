@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,10 +13,11 @@ import com.example.indoornavigationwithaugmentedreality.R;
 import com.example.indoornavigationwithaugmentedreality.model.Destination;
 
 import java.util.List;
+import java.util.Objects;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-    private List<Destination> destinationList;
-    private Context context;
+    private final List<Destination> destinationList;
+    private final Context context;
 
     public RecyclerViewAdapter(List<Destination> destinationList, Context context) {
         this.destinationList = destinationList;
@@ -34,9 +34,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Destination destination = destinationList.get(position);
-        holder.id.setText(destination.getId());
-        holder.office.setText(destination.getName());
+        Destination destination = Objects.requireNonNull(destinationList.get(position));
+        holder.id.setText(String.valueOf(destination.getId()));
+        holder.office.setText(String.valueOf(destination.getName()));
 
     }
 
@@ -45,10 +45,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return destinationList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView id;
         public TextView office;
-        public RelativeLayout relativeLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
